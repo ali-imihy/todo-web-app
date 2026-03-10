@@ -1,7 +1,6 @@
 # Todo Web Application
 
 A full stack task management web application built with Node.js, Express, and MySQL.
-# Todo Web Application
 
 Users can create, update, delete, and filter tasks in a persistent database.
 
