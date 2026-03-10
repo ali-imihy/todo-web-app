@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title To-Do List
+    link(rel="stylesheet", href="../css/todo.css")
+  body
+    nav
+      a(href="/filter/finished") Show Finished Tasks
+      a(href="/filter/in progress") Show In Progress Tasks  
+      a(href="/") Show All Tasks
+    h1 To-Do List
+    p Add a task:
+    form(action="/add", method="POST")
+      input(type="text", name="title", placeholder="Take a walk..." required)
+      button(type="submit") Add Task
+    if filter
+      p #{filter} tasks:
+    else
+      p All added tasks:
+    div(class="flex")
+      each item in todos
+        if item.progress === 'in progress'
+          div(style="background-color: navy;")
+            p Task: #{item.action} 
+            p Status: in progress...
+            button(class="switch" data-id=item.id data-progress="finished") Mark as Finished
+            form(action=`/delete/${item.id}`, method="POST")
+              button(type="submit") Delete Task
+        else
+          div(style="background-color: rgb(181, 148, 16);")
+            p Task: #{item.action} 
+            p Status: finished!
+            button(class="switch" data-id=item.id data-progress="in progress") Mark as In Progress
+            form(action=`/delete/${item.id}`, method="POST")
+              button(type="submit") Delete Task
+
+
+    script(src="../js/home.js")
